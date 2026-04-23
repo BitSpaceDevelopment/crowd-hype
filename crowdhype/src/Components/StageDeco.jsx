@@ -3,7 +3,7 @@ import React from "react";
 import * as THREE from "three";
 
 const StageDeco = () => {
-  const stageRing = new THREE.TextureLoader().load("/Textures/metalFloor.jpg");
+  const stageRing = new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}Textures/metalFloor.jpg`);
 
   return (
     <>

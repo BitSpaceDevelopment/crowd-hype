@@ -6,7 +6,8 @@ import { Interactive } from "@react-three/xr";
 import SubmitSound from "../Components/Sounds/SubmitSound";
 import * as THREE from "three";
 import BannedWordsList from "../Components/BannedWordsList";
-import { useGameCore }  from "../Context/GameCoreContext";
+import { useGameCore } from "../Context/GameCoreContext";
+import { addScore, qualifiesForLeaderboard } from "../utils/localScores";
 
 const GameOverScreen = ({
   gameOverOpacity,
@@ -20,13 +21,12 @@ const GameOverScreen = ({
 }) => {
   const [nameLetters, setNameLetters] = useState([" ", " ", " "]);
   const gameOverLight = useRef();
-  const [continueEnabled, setContinueEnabled,] = useState(true);
+  const [continueEnabled, setContinueEnabled] = useState(true);
   const [badWordError, setBadWordError] = useState(-10);
   const [hoverBackModeSelect, setHoverBackModeSelect] = useState(false);
-  const BASE_URL = process.env.REACT_APP_PUBLIC_BASE_URL;
 
   const { selectedMode } = useGameCore();
-  const isSession = selectedMode === 'session';
+  const mode = selectedMode === "session" ? "session" : "endless";
 
   const playSubmitSound = SubmitSound();
 
@@ -49,7 +49,6 @@ const GameOverScreen = ({
     return BannedWordsList.some((word) => name.toLowerCase().includes(word));
   };
 
-  // Target to point light at menu
   const setSpotlightTarget = (spotlightRef, position) => {
     if (spotlightRef.current) {
       spotlightRef.current.target.position.set(
@@ -63,115 +62,10 @@ const GameOverScreen = ({
   useEffect(() => {
     setSpotlightTarget(gameOverLight, [0, 1.7, -2.7]);
 
-    // API for getting the scores for db
-    const fetchScores = async () => {
-      if (isSession) {
-        try {
-          const response = await fetch(`${BASE_URL}sessionScores`);
-          const data = await response.json();
-          const formattedScores = data.rows.map((row) => ({
-            name: row.name,
-            points: row.points,
-          }));
-  
-          // Check if player's score qualifies
-          if (
-            formattedScores.length < 10 ||
-            playerScore > formattedScores[formattedScores.length - 1].points
-          ) {
-            setShowHighScoreInput(true);
-          }
-        } catch (error) {
-          console.error("Error fetching session scores:", error);
-        }
-      } else {
-        try {
-          const response = await fetch(`${BASE_URL}endlessScores`);
-          const data = await response.json();
-          const formattedScores = data.rows.map((row) => ({
-            name: row.name,
-            points: row.points,
-          }));
-  
-          // Check if player's score qualifies
-          if (
-            formattedScores.length < 10 ||
-            playerScore > formattedScores[formattedScores.length - 1].points
-          ) {
-            setShowHighScoreInput(true);
-          }
-        } catch (error) {
-          console.error("Error fetching endless scores:", error);
-        }
-      }
-    };
-
-    if (gameOver) {
-      fetchScores();
+    if (gameOver && qualifiesForLeaderboard(mode, playerScore)) {
+      setShowHighScoreInput(true);
     }
   }, [gameOver, playerScore]);
-
-  // API for posting new high score to db
-  const handleAddScore = async (playerName) => {
-    if (isSession) {
-      try {
-        const newScore = { name: playerName, points: playerScore };
-        await fetch(
-          `${BASE_URL}sessionScores?points=${newScore.points}&name=${newScore.name}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
-      } catch (error) {
-        console.error("Error adding session score:", error);
-      }
-    } else {
-      try {
-        const newScore = { name: playerName, points: playerScore };
-        await fetch(
-          `${BASE_URL}endlessScores?points=${newScore.points}&name=${newScore.name}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
-      } catch (error) {
-        console.error("Error adding endless score:", error);
-      }
-    }
-  };
-
-  // API for deleting old/worse score
-  const handleDeleteScore = async () => {
-    if (isSession) {
-      try {
-        await fetch(`${BASE_URL}sessionScores`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      } catch (error) {
-        console.error("Error adding session score:", error);
-      }
-    } else {
-      try {
-        await fetch(`${BASE_URL}endlessScores`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      } catch (error) {
-        console.error("Error adding endless score:", error);
-      }
-    }
-  };
 
   const handleContinue = () => {
     const playerName = nameLetters.join("").trim();
@@ -185,9 +79,10 @@ const GameOverScreen = ({
       }, 2000);
       return;
     }
-    handleAddScore(playerName);
+    if (showHighScoreInput) {
+      addScore(mode, playerName, playerScore);
+    }
     onContinue();
-    handleDeleteScore();
     setContinueEnabled(false);
   };
 
@@ -218,12 +113,13 @@ const GameOverScreen = ({
         {playerScore}
       </Text>
 
-      {/* Button to call apis and functions for resetting game */}
-      <Interactive 
+      {/* Button to save score and return to menu */}
+      <Interactive
         onHover={() => setHoverBackModeSelect(true)}
         onBlur={() => setHoverBackModeSelect(false)}
-        onSelectStart={playSubmitSound} 
-        onSelect={handleContinue}>
+        onSelectStart={playSubmitSound}
+        onSelect={handleContinue}
+      >
         <mesh position={[0, 0.15 + gameOverY, -2.65]} rotation={[-0.4, 0, 0]}>
           <RoundedBox
             args={[1.2, 0.3, 0.1]}
@@ -234,11 +130,15 @@ const GameOverScreen = ({
           >
             <meshBasicMaterial
               color={
-                continueEnabled ? (hoverBackModeSelect ? "#777" : "#666") : "#b30000" 
+                continueEnabled
+                  ? hoverBackModeSelect
+                    ? "#777"
+                    : "#666"
+                  : "#b30000"
               }
               transparent={true}
               opacity={gameOverOpacity}
-            />{/*#b30000*/}
+            />
           </RoundedBox>
           <Text
             fontSize={[0.19]}
@@ -270,7 +170,7 @@ const GameOverScreen = ({
 
       <mesh position={[0, 1.5, -3.5]} rotation={[0, Math.PI * 1.5, 0]}>
         <cylinderGeometry args={[8.5, 8.5, 13, 32, 1, false, 0, Math.PI]} />
-        <meshStandardMaterial 
+        <meshStandardMaterial
           color="#000"
           transparent={true}
           opacity={gameOverOverlay}
@@ -282,7 +182,6 @@ const GameOverScreen = ({
       {showHighScoreInput && (
         <HighScoreInput
           playerScore={playerScore}
-          onAddScore={handleAddScore}
           nameLetters={nameLetters}
           setNameLetters={setNameLetters}
           emissiveWhite={emissiveWhite}

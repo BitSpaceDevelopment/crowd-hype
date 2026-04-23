@@ -5,7 +5,7 @@ const GameOverSound = () => {
 
   useEffect(() => {
     const overAudio = new Audio(
-      "/Audio/soundEffects/crowdreaction_negative_01.mp3",
+      `${import.meta.env.BASE_URL}Audio/soundEffects/crowdreaction_negative_01.mp3`,
     );
 
     overAudio.volume = 0.2;

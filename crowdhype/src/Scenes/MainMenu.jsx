@@ -25,7 +25,7 @@ const MainMenu = () => {
   const fontSize = 0.14
 
   //const for textures and materials
-  const logo = useLoader(THREE.TextureLoader, "/Textures/HHlogo.png");
+  const logo = useLoader(THREE.TextureLoader, `${import.meta.env.BASE_URL}Textures/HHlogo.png`);
   const { addToMaterialRefs } = useContext(MaterialRefsContext);
 
   // const for sounds

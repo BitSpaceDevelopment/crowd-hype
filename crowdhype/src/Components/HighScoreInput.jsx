@@ -7,10 +7,10 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
 const CakeModel = ({ position }) => {
-  const fbx = useLoader(FBXLoader, "/Textures/SM_Cake.fbx");
+  const fbx = useLoader(FBXLoader, `${import.meta.env.BASE_URL}Textures/SM_Cake.fbx`);
   const texture = useLoader(
     THREE.TextureLoader,
-    "/Textures/T_Cake_AlbedoTransparency.png",
+    `${import.meta.env.BASE_URL}Textures/T_Cake_AlbedoTransparency.png`,
   );
 
   useEffect(() => {

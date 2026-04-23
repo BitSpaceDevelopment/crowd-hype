@@ -4,7 +4,7 @@ const StartGameSound = () => {
   const startSound = useRef(null);
 
   useEffect(() => {
-    const starAudio = new Audio("/Audio/soundEffects/coin_03.mp3");
+    const starAudio = new Audio(`${import.meta.env.BASE_URL}Audio/soundEffects/coin_03.mp3`);
 
     starAudio.volume = 0.2;
     startSound.current = starAudio;

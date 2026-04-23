@@ -6,7 +6,7 @@ import OverheadLights from "../OverheadLights"
 
 const MainStage = () => {
   const stageFloor = new THREE.TextureLoader().load(
-    "/Textures/metalFloorLight.jpg",
+    `${import.meta.env.BASE_URL}Textures/metalFloorLight.jpg`,
   );
   return (
     <>

@@ -5,7 +5,7 @@ const ButtonSound = () => {
 
   useEffect(() => {
     const buttonClickAudio = new Audio(
-      "/Audio/soundEffects/ui_click_rollover_misc_09.mp3",
+      `${import.meta.env.BASE_URL}Audio/soundEffects/ui_click_rollover_misc_09.mp3`,
     );
 
     buttonClickAudio.volume = 0.3;

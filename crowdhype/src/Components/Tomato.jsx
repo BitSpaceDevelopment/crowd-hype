@@ -15,7 +15,7 @@ const Tomato = ({
   hitGround,
   playerPosition,
 }) => {
-  const {scene} = useGLTF('/Textures/SM_Tomato_1.glb');
+  const {scene} = useGLTF(`${import.meta.env.BASE_URL}Textures/SM_Tomato_1.glb`);
   const getRanNum = (min, max) => Math.random() * (max - min) + min;
 
   const gravity = new THREE.Vector3(0, -0.005, 0);

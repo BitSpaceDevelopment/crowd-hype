@@ -9,9 +9,9 @@ const ConcertModel = () => {
   const spotlight2Ref = useRef();
   const spotlight3Ref = useRef();
   const spotlight4Ref = useRef();
-  const concertTexture = useLoader (FBXLoader, 
-    "/Textures/SM_ConcertVenue.fbx"
-  )  
+  const concertTexture = useLoader(FBXLoader,
+    `${import.meta.env.BASE_URL}Textures/SM_ConcertVenue.fbx`
+  )
 
   const setSpotlightTarget = (spotlightRef, position) => {
     if (spotlightRef.current) {

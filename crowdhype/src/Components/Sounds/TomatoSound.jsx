@@ -4,7 +4,7 @@ const TomatoSound = () => {
   const tomatoSound = useRef(null);
 
   useEffect(() => {
-    const tomatoAudio = new Audio("/Audio/soundEffects/slime-splat-1-219248.mp3");
+    const tomatoAudio = new Audio(`${import.meta.env.BASE_URL}Audio/soundEffects/slime-splat-1-219248.mp3`);
 
     tomatoAudio.volume = 0.3;
     tomatoSound.current = tomatoAudio;

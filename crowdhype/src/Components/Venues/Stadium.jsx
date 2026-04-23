@@ -3,8 +3,8 @@ import { FBXLoader } from "three-stdlib";
 import * as THREE from "three";
 
 const StadiumModel = () => {
-  const stadiumTexture = useLoader (FBXLoader, 
-    "/Textures/SM_Stadium_NoLightBeams.fbx"
+  const stadiumTexture = useLoader(FBXLoader,
+    `${import.meta.env.BASE_URL}Textures/SM_Stadium_NoLightBeams.fbx`
   )
 
   return (

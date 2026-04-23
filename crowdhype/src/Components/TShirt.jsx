@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 const TShirt = forwardRef((props, ref) => {
   const { camera } = useThree();
-  const gltf = useGLTF("/Textures/SM_FoldedShirt_1.glb");
+  const gltf = useGLTF(`${import.meta.env.BASE_URL}Textures/SM_FoldedShirt_1.glb`);
   const getRanNum = (min, max) => Math.random() * (max - min) + min;
   const { tShirtId, deleteTShirt } = props
 

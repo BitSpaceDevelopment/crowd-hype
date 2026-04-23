@@ -3,9 +3,9 @@ import { FBXLoader } from "three-stdlib";
 import { Sky } from "@react-three/drei";
 
 const FestivalModel = () => {
-  const concertTexture = useLoader (FBXLoader, 
-    "/Textures/SM_ConcertVenue.fbx"
-  )  
+  const concertTexture = useLoader(FBXLoader,
+    `${import.meta.env.BASE_URL}Textures/SM_ConcertVenue.fbx`
+  )
 
   return (
     <>

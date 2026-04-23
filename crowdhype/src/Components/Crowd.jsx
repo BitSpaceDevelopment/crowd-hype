@@ -46,7 +46,7 @@ const Crowd = ({
 
   const theCrowd = useLoader(
     THREE.TextureLoader,
-    "/Textures/HypeHeaven_Crowd.png",
+    `${import.meta.env.BASE_URL}Textures/HypeHeaven_Crowd.png`,
   );
 
   const handleHoverStart = () => {

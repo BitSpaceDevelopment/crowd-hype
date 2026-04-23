@@ -2,16 +2,17 @@ import { RoundedBox, Text } from "@react-three/drei";
 import { Interactive } from "@react-three/xr";
 import React, { useEffect, useState } from "react";
 import ButtonSound from "../Components/Sounds/ButtonSound";
-import { useGameCore }  from "../Context/GameCoreContext";
+import { useGameCore } from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
 import { useFrame } from "@react-three/fiber";
+import { getScores } from "../utils/localScores";
 
 const ScoresMenu = () => {
   const scoreFontSize = 0.12;
   const menuX = -2.7;
   const [hovered5, setHovered5] = useState(false);
   const [sessionScores, setSessionScores] = useState([]);
-  const [endlessScores, setEndlessScores] = useState([])
+  const [endlessScores, setEndlessScores] = useState([]);
   const playButtonSound = ButtonSound();
   const { setCurrentScene } = useGameCore();
   const [scoreMenuOpacity, setScoreMenuOpacity] = useState(0);
@@ -21,60 +22,35 @@ const ScoresMenu = () => {
 
   useEffect(() => {
     setFadingIn(true);
+    const endless = getScores("endless").map((r) => `${r.name} ${r.points}`);
+    setEndlessScores(endless);
+    const session = getScores("session").map((r) => `${r.name} ${r.points}`);
+    setSessionScores(session);
   }, []);
 
   useFrame(() => {
-    if (fadingIn){
-      fadeIn(setScoreMenuOpacity, setFadingIn)
+    if (fadingIn) {
+      fadeIn(setScoreMenuOpacity, setFadingIn);
     }
-  })
+  });
 
   useFrame(() => {
     if (fadingOut) {
       handleSceneChange(
-        newScene, setScoreMenuOpacity, setCurrentScene, setFadingOut
+        newScene,
+        setScoreMenuOpacity,
+        setCurrentScene,
+        setFadingOut,
       );
     }
   });
 
-  const BASE_URL = process.env.REACT_APP_PUBLIC_BASE_URL;
-
-  useEffect(() => {
-    fadeIn(setScoreMenuOpacity)
-  }, []);
-
-  // API for getting the endless scores in the db
-  useEffect(() => {
-    fetch(`${BASE_URL}endlessScores`)
-      .then((response) => response.json())
-      .then((data) => {
-        const formattedScores = data.rows
-          .slice(0, 10) // displays the first 10
-          .map((row) => `${row.name} ${row.points}`);
-        setEndlessScores(formattedScores);
-      })
-      .catch((err) => console.error("Failed to fetch scores:", err));
-  }, []);
-
-  // API for getting the session scores in the db
-  useEffect(() => {
-    fetch(`${BASE_URL}sessionScores`)
-      .then((response) => response.json())
-      .then((data) => {
-        const formattedScores = data.rows
-          .slice(0, 10) // displays the first 10
-          .map((row) => `${row.name} ${row.points}`);
-        setSessionScores(formattedScores);
-      })
-      .catch((err) => console.error("Failed to fetch scores:", err));
-  }, []);
-
   const tryChangeScene = (newScene) => {
     if (scoreMenuOpacity === 1) {
-      setNewScene(newScene)
+      setNewScene(newScene);
       setFadingOut(true);
     }
-  }
+  };
 
   return (
     <>
@@ -137,7 +113,7 @@ const ScoresMenu = () => {
         onBlur={() => setHovered5(false)}
         onSelectStart={playButtonSound}
         onSelect={() => {
-          tryChangeScene("mainMenu")
+          tryChangeScene("mainMenu");
         }}
       >
         <mesh position={[0, 0.3, menuX]}>
@@ -158,7 +134,7 @@ const ScoresMenu = () => {
             position={[0, 0, 0]}
             fontSize={0.14}
             transparent={true}
-          fillOpacity={scoreMenuOpacity}
+            fillOpacity={scoreMenuOpacity}
           >
             Back To Menu
           </Text>

@@ -4,7 +4,7 @@ const CrowdWoo = () => {
   const crowdSound = useRef(null);
 
   useEffect(() => {
-    const crowdAudio = new Audio("/Audio/soundEffects/woo-3.wav");
+    const crowdAudio = new Audio(`${import.meta.env.BASE_URL}Audio/soundEffects/woo-3.wav`);
 
     crowdAudio.volume = 0.2;
     crowdSound.current = crowdAudio;
