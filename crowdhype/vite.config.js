@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [react()],
   base: "/crowd-hype/",
   build: {
-    outDir: "../docs",
-    emptyOutDir: true,
+    outDir: "../",
+    emptyOutDir: false,
   },
   esbuild: {
     loader: "jsx",
