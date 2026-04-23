@@ -4,6 +4,10 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/crowd-hype/",
+  build: {
+    outDir: "../docs",
+    emptyOutDir: true,
+  },
   esbuild: {
     loader: "jsx",
     include: /src\/.*\.[jt]sx?$/,
