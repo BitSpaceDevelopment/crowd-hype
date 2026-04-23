@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
@@ -16,7 +16,7 @@ const SongButton = ({
 
   return (
     <>
-      <Interactive
+      <GameInteractive
         onHover={() => setHovered(true)}
         onBlur={() => setHovered(false)}
         onSelectStart={playButtonSound}
@@ -51,7 +51,7 @@ const SongButton = ({
             {text}
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   )
 }
@@ -200,7 +200,7 @@ const SongSelect = () => {
         tryChangeScene={tryChangeScene}
       />
 
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverBackSongSelect(true)}
         onBlur={() => setHoverBackSongSelect(false)}
         onSelectStart={playButtonSound}
@@ -231,7 +231,7 @@ const SongSelect = () => {
             BACK
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   )
 }

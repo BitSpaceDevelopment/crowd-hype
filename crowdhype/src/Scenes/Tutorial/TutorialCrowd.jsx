@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../../Components/GameInteractive";
 import * as THREE from "three";
 import CrowdWoo from "../../Components/Sounds/CrowdWoo";
 import { useGameCore } from "../../Context/GameCoreContext";
@@ -228,7 +228,7 @@ const TutorialCrowd = ({
           />
       </mesh>
 
-      <Interactive onHover={combinedHoverHandler} onBlur={handleHoverEnd}>
+      <GameInteractive onHover={combinedHoverHandler} onBlur={handleHoverEnd}>
         <mesh ref={plane1Ref}>
           <planeGeometry args={[3, 2]} transparent={true} opacity={0} />
           <meshBasicMaterial 
@@ -238,7 +238,7 @@ const TutorialCrowd = ({
           side={THREE.DoubleSide}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       <mesh position={[0, 1.5, 0.001]}>
         <torusGeometry args={[0.3, 0.1, 30, 100, counter]} />

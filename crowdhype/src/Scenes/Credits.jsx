@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
@@ -182,7 +182,7 @@ const Credits = () => {
         Chip Tune Music By: Lesia Kower
       </Text>
 
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverBackCredit(true)}
         onBlur={() => setHoverBackCredit(false)}
         onSelectStart={playButtonSound}
@@ -213,7 +213,7 @@ const Credits = () => {
             Back To Menu
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   );
 };

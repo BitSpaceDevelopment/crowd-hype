@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "./GameInteractive";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -175,7 +175,7 @@ const TShirt = forwardRef((props, ref) => {
 
   return (
     <>
-      <Interactive 
+      <GameInteractive 
         ref={ref} 
         onSelectStart={(e) => handleGrab(e)}
         onSqueezeStart={(e) => handleGrab(e)}
@@ -190,7 +190,7 @@ const TShirt = forwardRef((props, ref) => {
             depthTest={true}
           />
         )}
-      </Interactive>
+      </GameInteractive>
     </>
   );
 });

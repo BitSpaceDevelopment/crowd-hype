@@ -1,4 +1,4 @@
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "./GameInteractive";
 import React, { useEffect, useRef, useState } from "react";
 import Crowd from "./Crowd";
 import { Text } from "@react-three/drei";
@@ -197,7 +197,7 @@ const CrowdTarget = ({
 
   return (
     <>
-      <Interactive>
+      <GameInteractive>
         {/* Interactive Crowd for gaining score (left) */}
         <mesh position={[-3.5, 0, -5]} rotation={[0, Math.PI / 8, 0]}>
           <Crowd
@@ -257,7 +257,7 @@ const CrowdTarget = ({
             tShirtRefs={tShirtRefs}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Display total additions */}
       <Text position={[-6, 3, -6]} rotation={[0, 0.5, 0]} fontSize={0.4}>

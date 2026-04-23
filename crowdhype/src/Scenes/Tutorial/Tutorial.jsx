@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Goal from "./Goal";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../../Components/GameInteractive";
 import { RoundedBox, Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { fadeIn, handleSceneChange } from "../../Animations/MenuAnimations";
@@ -98,7 +98,7 @@ const Tutorial = () => {
     <>
       {RenderScene()}
       {/*Back*/}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverBack(true)}
         onBlur={() => setHoverBack(false)}
         onSelectStart={playButtonSound}
@@ -129,10 +129,10 @@ const Tutorial = () => {
             BACK
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/*Next*/}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverNext(true)}
         onBlur={() => setHoverNext(false)}
         onSelectStart={playButtonSound}
@@ -161,7 +161,7 @@ const Tutorial = () => {
             {currentTutorial === numTutorial ? "HOME" : "NEXT"}
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "./GameInteractive";
 import { MeshStandardMaterial, MeshBasicMaterial } from "three";
 import ButtonSound from "./Sounds/ButtonSound";
 
@@ -67,7 +67,7 @@ const NameInput = ({ onLetterChange }) => {
   return (
     <>
       {/* Cone geometry to make it look like an arrow ( /\ ) */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHovered1(true)}
         onBlur={() => setHovered1(false)}
         onSelectStart={playButtonSound}
@@ -81,7 +81,7 @@ const NameInput = ({ onLetterChange }) => {
           <coneGeometry args={[0.1, 0.01, 3]} />
           <primitive object={basicMaterialHovered1} />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Text to display the current letter selected */}
       <Text
@@ -93,7 +93,7 @@ const NameInput = ({ onLetterChange }) => {
       </Text>
 
       {/* Cone geometry to make it look like an arrow  ( \/ )*/}
-      <Interactive
+      <GameInteractive
         onHover={() => setHovered2(true)}
         onBlur={() => setHovered2(false)}
         onSelectStart={playButtonSound}
@@ -107,7 +107,7 @@ const NameInput = ({ onLetterChange }) => {
           <coneGeometry args={[0.1, 0.01, 3]} />
           <primitive object={basicMaterialHovered2} />
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   );
 };

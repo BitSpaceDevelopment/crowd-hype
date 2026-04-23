@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
@@ -59,7 +59,7 @@ const VenueSelect = () => {
       </Text>
 
       {/* Concert button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredConcert(true)}
         onBlur={() => setHoveredConcert(false)}
         onSelectStart={playButtonSound}
@@ -90,10 +90,10 @@ const VenueSelect = () => {
             CONCERT
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Game button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredGame(true)}
         onBlur={() => setHoveredGame(false)}
         onSelectStart={playButtonSound}
@@ -124,10 +124,10 @@ const VenueSelect = () => {
             GAME
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Festival button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredFestival(true)}
         onBlur={() => setHoveredFestival(false)}
         onSelectStart={playButtonSound}
@@ -158,9 +158,9 @@ const VenueSelect = () => {
             FESTIVAL
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredBackVenue(true)}
         onBlur={() => setHoveredBackVenue(false)}
         onSelectStart={playButtonSound}
@@ -191,7 +191,7 @@ const VenueSelect = () => {
             BACK
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   )
 }

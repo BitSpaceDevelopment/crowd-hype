@@ -1,5 +1,5 @@
 import { Plane, RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import React, { useState, useContext, useEffect } from "react";
 import * as THREE from "three";
 import { MaterialRefsContext } from "../Components/RefsProvider";
@@ -70,7 +70,7 @@ const MainMenu = () => {
       |               QUIT GAME
       |========================================
       */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredQuit(true)}
         onBlur={() => setHoveredQuit(false)}
         onSelectStart={playButtonSound}
@@ -100,14 +100,14 @@ const MainMenu = () => {
             Quit Game
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
         {/*
       |========================================
       |               High Scores
       |========================================
       */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredScores(true)}
         onBlur={() => setHoveredScores(false)}
         onSelectStart={playButtonSound}
@@ -139,14 +139,14 @@ const MainMenu = () => {
             High Scores
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
         {/*
       |========================================
       |               Credits
       |========================================
       */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredSettings(true)}
         onBlur={() => setHoveredSettings(false)}
         onSelectStart={playButtonSound}
@@ -178,14 +178,14 @@ const MainMenu = () => {
             Credits
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
         {/*
       |========================================
       |               Start GAME
       |========================================
       */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredStart(true)}
         onBlur={() => setHoveredStart(false)}
         onSelectStart={playStartSound}
@@ -218,14 +218,14 @@ const MainMenu = () => {
             Start Game
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/*
       |========================================
       |               Tutorial
       |========================================
       */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredTutorial(true)}
         onBlur={() => setHoveredTutorial(false)}
         onSelectStart={playButtonSound}
@@ -257,7 +257,7 @@ const MainMenu = () => {
             How To Play
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
       
       {/* Plane for mapping logo onto */}
       <Plane args={[2.5, 0.7]} position={[0, 2.3, -2.75]}>

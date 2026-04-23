@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
@@ -56,7 +56,7 @@ const ModeSelect = () => {
       </Text>
 
       {/* Session button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredSession(true)}
         onBlur={() => setHoveredSession(false)}
         onSelectStart={playButtonSound}
@@ -88,10 +88,10 @@ const ModeSelect = () => {
             SESSION MODE
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Endless button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoveredEndless(true)}
         onBlur={() => setHoveredEndless(false)}
         onSelectStart={playButtonSound}
@@ -123,10 +123,10 @@ const ModeSelect = () => {
             ENDLESS MODE
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       {/* Back to main menu button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverBackModeSelect(true)}
         onBlur={() => setHoverBackModeSelect(false)}
         onSelectStart={playButtonSound}
@@ -157,7 +157,7 @@ const ModeSelect = () => {
             BACK
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
       <Text
         position={[0, 0.5, ZLocation]}
         fontSize={fontSize}

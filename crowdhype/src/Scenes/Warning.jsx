@@ -1,5 +1,5 @@
 import { Plane, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import { useGameCore }  from "../Context/GameCoreContext";
 import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
 import { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ const Warning = () => {
 
   return (
     <>
-      <Interactive onSelect={() => {
+      <GameInteractive onSelect={() => {
           tryChangeScene("mainMenu")
           playMenuMusic();
         }}>
@@ -75,7 +75,7 @@ const Warning = () => {
             click anywhere to continue
           </Text>
         </Plane>
-      </Interactive>
+      </GameInteractive>
     </>
   )
 }

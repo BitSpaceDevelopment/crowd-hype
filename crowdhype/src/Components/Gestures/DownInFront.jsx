@@ -1,6 +1,6 @@
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../GameInteractive";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import CrowdWoo from "../Sounds/CrowdWoo";
@@ -268,7 +268,7 @@ const DownInFront = ({
 
   return(
     <>
-      <Interactive 
+      <GameInteractive 
         onHover={(e) => {handleHoverLine1(e)}} 
         onBlur={(e) => {handleBlurLine1(e)}}
       >
@@ -290,9 +290,9 @@ const DownInFront = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
-      <Interactive 
+      <GameInteractive 
         onHover={(e) => {handleHoverLine2(e)}} 
         onBlur={(e) => {handleBlurLine2(e)}}
       >
@@ -314,9 +314,9 @@ const DownInFront = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
-      <Interactive 
+      <GameInteractive 
         onHover={(e) => {handleHoverEnd1(e)}} 
         onBlur={(e) => {handleBlurEnd1(e)}}
       >
@@ -329,9 +329,9 @@ const DownInFront = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
-      <Interactive 
+      <GameInteractive 
         onHover={(e) => {handleHoverEnd2(e)}} 
         onBlur={(e) => {handleBlurEnd2(e)}}
       >
@@ -344,7 +344,7 @@ const DownInFront = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       <Text
         position={textPosition} 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Plane, RoundedBox, Text } from "@react-three/drei";
 import { MeshStandardMaterial } from "three";
 import HighScoreInput from "../Components/HighScoreInput";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import SubmitSound from "../Components/Sounds/SubmitSound";
 import * as THREE from "three";
 import BannedWordsList from "../Components/BannedWordsList";
@@ -114,7 +114,7 @@ const GameOverScreen = ({
       </Text>
 
       {/* Button to save score and return to menu */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHoverBackModeSelect(true)}
         onBlur={() => setHoverBackModeSelect(false)}
         onSelectStart={playSubmitSound}
@@ -148,7 +148,7 @@ const GameOverScreen = ({
             Continue
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       <Text position={[0, badWordError, -2]} fontSize={0.25} color="#b30000">
         Name is not allowed

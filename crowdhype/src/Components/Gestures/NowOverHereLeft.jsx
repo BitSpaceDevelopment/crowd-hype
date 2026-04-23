@@ -1,6 +1,6 @@
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../GameInteractive";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import CrowdWoo from "../Sounds/CrowdWoo";
@@ -160,7 +160,7 @@ const NowOverHereLeft = ({
 
   return(
     <>
-      <Interactive onHover={(e) => {handleHoverLine(e)}} onBlur={handleBlurLine}>
+      <GameInteractive onHover={(e) => {handleHoverLine(e)}} onBlur={handleBlurLine}>
         <mesh position={pathPosition} rotation={pathRotation}>
           <torusGeometry args={[pathRadius, 0.13, 30, 30, pathArc]} />
           <meshBasicMaterial
@@ -179,9 +179,9 @@ const NowOverHereLeft = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
-      <Interactive onHover={handleHoverEnd} onBlur={handleBlurEnd}>
+      <GameInteractive onHover={handleHoverEnd} onBlur={handleBlurEnd}>
         <mesh position={endPosition}>
           <sphereGeometry args={[0.24]}/>
           <meshBasicMaterial
@@ -191,7 +191,7 @@ const NowOverHereLeft = ({
             opacity={gestureOpacity}
           />
         </mesh>
-      </Interactive>
+      </GameInteractive>
 
       <Text
         position={textPosition} 

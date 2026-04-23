@@ -1,5 +1,5 @@
 import { RoundedBox, Text } from "@react-three/drei";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "../Components/GameInteractive";
 import React, { useEffect, useState } from "react";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore } from "../Context/GameCoreContext";
@@ -108,7 +108,7 @@ const ScoresMenu = () => {
       ))}
 
       {/* Back to main menu button */}
-      <Interactive
+      <GameInteractive
         onHover={() => setHovered5(true)}
         onBlur={() => setHovered5(false)}
         onSelectStart={playButtonSound}
@@ -139,7 +139,7 @@ const ScoresMenu = () => {
             Back To Menu
           </Text>
         </mesh>
-      </Interactive>
+      </GameInteractive>
     </>
   );
 };

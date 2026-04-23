@@ -1,7 +1,7 @@
 import { Text } from "@react-three/drei";
 import React, { useState } from "react";
 import { useGameCore } from "../Context/GameCoreContext";
-import { Interactive } from "@react-three/xr";
+import GameInteractive from "./GameInteractive";
 
 /*
   Used for testing in VR. 
@@ -17,7 +17,7 @@ const ConsoleLogs = () => {
 
   return (
     <>
-      <Interactive onSelect={() => {
+      <GameInteractive onSelect={() => {
         handleMove();
       }}>
         {logs.map((log, index) => (
@@ -30,7 +30,7 @@ const ConsoleLogs = () => {
             {log}
           </Text>
         ))}
-      </Interactive>
+      </GameInteractive>
     </>
   );
 };
