@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RoundedBox, Text } from "@react-three/drei";
+import { Box, Text } from "@react-three/drei";
 import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
@@ -29,22 +29,17 @@ const SongButton = ({
         }}
       >
         <mesh position={[0, yLocation, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hovered ? "#777" : "#666"}
+              color={hovered ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={opacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={opacity}
           >
@@ -74,7 +69,7 @@ const SongSelect = () => {
   const [fadingIn, setFadingIn] = useState(false);
   const [fadingOut, setFadingOut] = useState(false);
   const [newScene, setNewScene] = useState();
-  
+
   useEffect(() => {
     setFadingIn(true);
   }, []);
@@ -103,102 +98,24 @@ const SongSelect = () => {
 
   return (
     <>
-      <Text 
-        fontSize={0.4} 
+      <Text
+        fontSize={0.4}
         position={[0, 3, ZLocation]}
+        letterSpacing={0.05}
         transparent={true}
         fillOpacity={songSelectOpacity}
-        >
-        Song Select
+      >
+        SONG SELECT
       </Text>
 
-      {/*Rock*/}
-      <SongButton 
-        genre={"rock"}
-        setHovered={setHoveredRock}
-        yLocation={2.4}
-        hovered={hoveredRock}
-        text={"Rock"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*Country*/}
-      <SongButton 
-        genre={"country"}
-        setHovered={setHoveredCountry}
-        yLocation={2.1}
-        hovered={hoveredCountry}
-        text={"Country"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*edm*/}
-      <SongButton 
-        genre={"edm"}
-        setHovered={setHoveredEdm}
-        yLocation={1.8}
-        hovered={hoveredEdm}
-        text={"EDM"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*Pop*/}
-      <SongButton 
-        genre={"pop"}
-        setHovered={setHoveredPop}
-        yLocation={1.5}
-        hovered={hoveredPop}
-        text={"Pop"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*HipHop*/}
-      <SongButton 
-        genre={"hipHop"}
-        setHovered={setHoveredHipHop}
-        yLocation={1.2}
-        hovered={hoveredHipHop}
-        text={"Hip-Hop"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*Phonk*/}
-      <SongButton 
-        genre={"phonk"}
-        setHovered={setHoveredPhonk}
-        yLocation={0.9}
-        hovered={hoveredPhonk}
-        text={"Phonk"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*ChipTune*/}
-      <SongButton 
-        genre={"chipTune"}
-        setHovered={setHoveredChipTune}
-        yLocation={0.6}
-        hovered={hoveredChipTune}
-        text={"Chip Tune"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
-
-      {/*FolkMetal*/}
-      <SongButton 
-        genre={"folkMetal"}
-        setHovered={setHoveredFolkMetal}
-        yLocation={0.3}
-        hovered={hoveredFolkMetal}
-        text={"Folk Metal"}
-        opacity={songSelectOpacity}
-        tryChangeScene={tryChangeScene}
-      />
+      <SongButton genre={"rock"} setHovered={setHoveredRock} yLocation={2.4} hovered={hoveredRock} text={"ROCK"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"country"} setHovered={setHoveredCountry} yLocation={2.1} hovered={hoveredCountry} text={"COUNTRY"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"edm"} setHovered={setHoveredEdm} yLocation={1.8} hovered={hoveredEdm} text={"EDM"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"pop"} setHovered={setHoveredPop} yLocation={1.5} hovered={hoveredPop} text={"POP"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"hipHop"} setHovered={setHoveredHipHop} yLocation={1.2} hovered={hoveredHipHop} text={"HIP-HOP"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"phonk"} setHovered={setHoveredPhonk} yLocation={0.9} hovered={hoveredPhonk} text={"PHONK"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"chipTune"} setHovered={setHoveredChipTune} yLocation={0.6} hovered={hoveredChipTune} text={"CHIP TUNE"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
+      <SongButton genre={"folkMetal"} setHovered={setHoveredFolkMetal} yLocation={0.3} hovered={hoveredFolkMetal} text={"FOLK METAL"} opacity={songSelectOpacity} tryChangeScene={tryChangeScene} />
 
       <GameInteractive
         onHover={() => setHoverBackSongSelect(true)}
@@ -209,22 +126,17 @@ const SongSelect = () => {
         }}
       >
         <mesh position={[-1.3, 1.6, ZLocation]}>
-          <RoundedBox
-            args={[0.7, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[0.7, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoverBackSongSelect ? "#777" : "#666"}
+              color={hoverBackSongSelect ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={songSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={songSelectOpacity}
           >

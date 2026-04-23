@@ -3,8 +3,10 @@ import { Plane } from "@react-three/drei";
 import StageDeco from "../StageDeco";
 import * as THREE from "three";
 import OverheadLights from "../OverheadLights"
+import { useXR } from "@react-three/xr";
 
 const MainStage = () => {
+  const isPresenting = useXR((state) => state.isPresenting);
   const stageFloor = new THREE.TextureLoader().load(
     `${import.meta.env.BASE_URL}Textures/metalFloorLight.jpg`,
   );
@@ -23,49 +25,56 @@ const MainStage = () => {
         <meshStandardMaterial map={stageFloor} color="#fff" />
       </Plane>
 
-      {/* Stage Back Wall */}
-      <Plane
-        args={[11, 8]}
-        position={[0, 3, 2.5]}
-        rotation={[0, -Math.PI / 1, 0]}
-      >
-        <meshBasicMaterial
-          attach="material"
-          color="#707070"
-          side={THREE.DoubleSide}
-        />
-      </Plane>
+      {/* Stage Back Wall — hidden in desktop mode */}
+      {isPresenting && (
+        <Plane
+          args={[11, 8]}
+          position={[0, 3, 2.5]}
+          rotation={[0, -Math.PI / 1, 0]}
+        >
+          <meshBasicMaterial
+            attach="material"
+            color="#707070"
+            side={THREE.DoubleSide}
+          />
+        </Plane>
+      )}
 
-      {/* Stage Wall */}
-      <Plane args={[9.5, 10]} position={[-6, 4.5, 0.75]} rotation={[0, 2.4, 0]}>
-        <meshBasicMaterial
-          attach="material"
-          color="#666"
-          side={THREE.DoubleSide}
-        />
-      </Plane>
+      {/* Stage Side Walls — hidden in desktop mode */}
+      {isPresenting && (
+        <>
+          <Plane args={[9.5, 10]} position={[-6, 4.5, 0.75]} rotation={[0, 2.4, 0]}>
+            <meshBasicMaterial
+              attach="material"
+              color="#666"
+              side={THREE.DoubleSide}
+            />
+          </Plane>
 
-      {/* Stage Wall */}
-      <Plane args={[9.5, 10]} position={[6, 4.5, 0.75]} rotation={[0, -2.4, 0]}>
-        <meshBasicMaterial
-          attach="material"
-          color="#666"
-          side={THREE.DoubleSide}
-        />
-      </Plane>
+          <Plane args={[9.5, 10]} position={[6, 4.5, 0.75]} rotation={[0, -2.4, 0]}>
+            <meshBasicMaterial
+              attach="material"
+              color="#666"
+              side={THREE.DoubleSide}
+            />
+          </Plane>
+        </>
+      )}
 
-      {/* Stage Roof Back*/}
-      <Plane
-        args={[20, 12]}
-        position={[0, 9, -2]}
-        rotation={[-Math.PI / 2.8, 0, 0]}
-      >
-        <meshBasicMaterial
-          attach="material"
-          color="#333"
-          side={THREE.DoubleSide}
-        />
-      </Plane>
+      {/* Stage Roof — hidden in desktop mode */}
+      {isPresenting && (
+        <Plane
+          args={[20, 12]}
+          position={[0, 9, -2]}
+          rotation={[-Math.PI / 2.8, 0, 0]}
+        >
+          <meshBasicMaterial
+            attach="material"
+            color="#333"
+            side={THREE.DoubleSide}
+          />
+        </Plane>
+      )}
 
       {/* Stage Decorations */}
       <StageDeco />
@@ -73,7 +82,7 @@ const MainStage = () => {
       {/* Sky box */}
       <mesh >
         <boxGeometry args={[500, 500, 500]}/>
-        <meshStandardMaterial 
+        <meshStandardMaterial
           color={"#111"}
           side={THREE.DoubleSide}
         />

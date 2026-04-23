@@ -1,4 +1,4 @@
-import { RoundedBox, Text } from "@react-three/drei";
+import { Box, Text } from "@react-three/drei";
 import GameInteractive from "../Components/GameInteractive";
 import React, { useEffect, useState } from "react";
 import ButtonSound from "../Components/Sounds/ButtonSound";
@@ -22,9 +22,9 @@ const ScoresMenu = () => {
 
   useEffect(() => {
     setFadingIn(true);
-    const endless = getScores("endless").map((r) => `${r.name} ${r.points}`);
+    const endless = getScores("endless").map((r) => `${r.name}   ${r.points}`);
     setEndlessScores(endless);
-    const session = getScores("session").map((r) => `${r.name} ${r.points}`);
+    const session = getScores("session").map((r) => `${r.name}   ${r.points}`);
     setSessionScores(session);
   }, []);
 
@@ -54,58 +54,75 @@ const ScoresMenu = () => {
 
   return (
     <>
-      {/* Text for Highscores */}
       <Text
         position={[0, 3, menuX]}
         fontSize={0.3}
+        letterSpacing={0.05}
         transparent={true}
         fillOpacity={scoreMenuOpacity}
       >
-        High Scores
+        HIGH SCORES
       </Text>
 
       <Text
         position={[-0.83, 2.65, menuX]}
-        fontSize={0.18}
+        fontSize={0.15}
+        letterSpacing={0.05}
+        color="#aaa"
         transparent={true}
         fillOpacity={scoreMenuOpacity}
       >
-        Endless Mode
+        ENDLESS MODE
       </Text>
 
       <Text
         position={[0.83, 2.65, menuX]}
-        fontSize={0.18}
+        fontSize={0.15}
+        letterSpacing={0.05}
+        color="#aaa"
         transparent={true}
         fillOpacity={scoreMenuOpacity}
       >
-        Session Mode
+        SESSION MODE
       </Text>
 
-      {/* Text for the players score / mapping texture */}
       {endlessScores.map((score, index) => (
         <Text
           key={index}
           position={[-0.83, 2.4 - 0.2 * index, menuX]}
           fontSize={scoreFontSize}
+          color="#e5e5e5"
           transparent={true}
           fillOpacity={scoreMenuOpacity}
         >
           {score}
         </Text>
       ))}
+
+      {endlessScores.length === 0 && (
+        <Text position={[-0.83, 2.4, menuX]} fontSize={scoreFontSize} color="#444" transparent={true} fillOpacity={scoreMenuOpacity}>
+          No scores yet
+        </Text>
+      )}
 
       {sessionScores.map((score, index) => (
         <Text
           key={index}
           position={[0.83, 2.4 - 0.2 * index, menuX]}
           fontSize={scoreFontSize}
+          color="#e5e5e5"
           transparent={true}
           fillOpacity={scoreMenuOpacity}
         >
           {score}
         </Text>
       ))}
+
+      {sessionScores.length === 0 && (
+        <Text position={[0.83, 2.4, menuX]} fontSize={scoreFontSize} color="#444" transparent={true} fillOpacity={scoreMenuOpacity}>
+          No scores yet
+        </Text>
+      )}
 
       {/* Back to main menu button */}
       <GameInteractive
@@ -117,26 +134,21 @@ const ScoresMenu = () => {
         }}
       >
         <mesh position={[0, 0.3, menuX]}>
-          <RoundedBox
-            args={[1.2, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.2, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hovered5 ? "#777" : "#666"}
+              color={hovered5 ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={scoreMenuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={0.14}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={scoreMenuOpacity}
           >
-            Back To Menu
+            BACK TO MENU
           </Text>
         </mesh>
       </GameInteractive>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Plane, RoundedBox, Text } from "@react-three/drei";
+import { Box, Plane, Text } from "@react-three/drei";
 import { MeshStandardMaterial } from "three";
 import HighScoreInput from "../Components/HighScoreInput";
 import GameInteractive from "../Components/GameInteractive";
@@ -91,18 +91,21 @@ const GameOverScreen = ({
       <Text
         position={[0, 2.7 + gameOverY, -2.7]}
         fontSize={0.5}
+        letterSpacing={0.05}
         color="#b30000"
         material={transparentMaterial && emissiveRed}
       >
-        Game Over
+        GAME OVER
       </Text>
 
       <Text
         position={[0, 2.2 + gameOverY, -2.7]}
-        fontSize={0.2}
+        fontSize={0.18}
+        letterSpacing={0.08}
+        color="#aaa"
         material={transparentMaterial && emissiveWhite}
       >
-        Your Score
+        YOUR SCORE
       </Text>
 
       <Text
@@ -121,37 +124,32 @@ const GameOverScreen = ({
         onSelect={handleContinue}
       >
         <mesh position={[0, 0.15 + gameOverY, -2.65]} rotation={[-0.4, 0, 0]}>
-          <RoundedBox
-            args={[1.2, 0.3, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.2, 0.3, 0.1]}>
             <meshBasicMaterial
               color={
                 continueEnabled
                   ? hoverBackModeSelect
-                    ? "#777"
-                    : "#666"
+                    ? "#2a2a2a"
+                    : "#1a1a1a"
                   : "#b30000"
               }
               transparent={true}
               opacity={gameOverOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            fontSize={[0.19]}
-            position={[0, 0, 0.01]}
+            fontSize={0.19}
+            letterSpacing={0.05}
+            position={[0, 0, 0.06]}
             material={transparentMaterial && emissiveWhite}
           >
-            Continue
+            CONTINUE
           </Text>
         </mesh>
       </GameInteractive>
 
       <Text position={[0, badWordError, -2]} fontSize={0.25} color="#b30000">
-        Name is not allowed
+        NAME IS NOT ALLOWED
       </Text>
 
       <Plane args={[3, 0.5]} position={[0, badWordError, -2.001]}>
@@ -178,7 +176,6 @@ const GameOverScreen = ({
         />
       </mesh>
 
-      {/* Conditional rendering to determine if player has a high score*/}
       {showHighScoreInput && (
         <HighScoreInput
           playerScore={playerScore}

@@ -1,4 +1,4 @@
-import { Plane, RoundedBox, Text } from "@react-three/drei";
+import { Box, Plane, Text } from "@react-three/drei";
 import GameInteractive from "../Components/GameInteractive";
 import React, { useState, useContext, useEffect } from "react";
 import * as THREE from "three";
@@ -11,7 +11,6 @@ import { fadeIn, handleSceneChange } from "../Animations/MenuAnimations";
 import { stopSession } from "@react-three/xr";
 
 const MainMenu = () => {
-  // const for handling hovers
   const [hoveredQuit, setHoveredQuit] = useState(false);
   const [hoveredScores, setHoveredScores] = useState(false);
   const [hoveredSettings, setHoveredSettings] = useState(false);
@@ -22,18 +21,15 @@ const MainMenu = () => {
   const [menuOpacity, setMenuOpacity] = useState(0);
   const [newScene, setNewScene] = useState();
   const { setCurrentScene } = useGameCore();
-  const fontSize = 0.14
+  const fontSize = 0.14;
 
-  //const for textures and materials
   const logo = useLoader(THREE.TextureLoader, `${import.meta.env.BASE_URL}Textures/HHlogo.png`);
   const { addToMaterialRefs } = useContext(MaterialRefsContext);
 
-  // const for sounds
   const playButtonSound = ButtonSound();
   const playStartSound = StartGameSound();
 
   useEffect(() => {
-    //fade-in when scene loads
     setFadingIn(true);
   }, []);
 
@@ -44,7 +40,6 @@ const MainMenu = () => {
   })
 
   useFrame(() => {
-    //fade-out when changing scenes
     if (fadingOut) {
       handleSceneChange(
         newScene, setMenuOpacity, setCurrentScene, setFadingOut
@@ -65,48 +60,35 @@ const MainMenu = () => {
 
   return (
     <>
-      {/*
-      |========================================
-      |               QUIT GAME
-      |========================================
-      */}
+      {/* QUIT GAME */}
       <GameInteractive
         onHover={() => setHoveredQuit(true)}
         onBlur={() => setHoveredQuit(false)}
         onSelectStart={playButtonSound}
-        onSelect={handleQuitGame}      
+        onSelect={handleQuitGame}
       >
         <mesh position={[0, 0.7, -2.7]}>
-          <RoundedBox
-            args={[1.9, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.9, 0.2, 0.1]}>
             <meshBasicMaterial
               ref={addToMaterialRefs}
-              color={hoveredQuit ? "#7c5c5c" : "#666"}
+              color={hoveredQuit ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={menuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0.01]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={menuOpacity}
           >
-            Quit Game
+            QUIT GAME
           </Text>
         </mesh>
       </GameInteractive>
 
-        {/*
-      |========================================
-      |               High Scores
-      |========================================
-      */}
+      {/* HIGH SCORES */}
       <GameInteractive
         onHover={() => setHoveredScores(true)}
         onBlur={() => setHoveredScores(false)}
@@ -116,36 +98,27 @@ const MainMenu = () => {
         }}
       >
         <mesh position={[-0.45, 1.3, -2.7]}>
-          <RoundedBox
-            args={[1, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1, 0.2, 0.1]}>
             <meshBasicMaterial
               ref={addToMaterialRefs}
-              color={hoveredScores ? "#777" : "#666"}
+              color={hoveredScores ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={menuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0.01]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={menuOpacity}
           >
-            High Scores
+            HIGH SCORES
           </Text>
         </mesh>
       </GameInteractive>
 
-        {/*
-      |========================================
-      |               Credits
-      |========================================
-      */}
+      {/* CREDITS */}
       <GameInteractive
         onHover={() => setHoveredSettings(true)}
         onBlur={() => setHoveredSettings(false)}
@@ -155,36 +128,27 @@ const MainMenu = () => {
         }}
       >
         <mesh position={[0.55, 1.3, -2.7]}>
-          <RoundedBox
-            args={[0.8, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[0.8, 0.2, 0.1]}>
             <meshBasicMaterial
               ref={addToMaterialRefs}
-              color={hoveredSettings ? "#777" : "#666"}
+              color={hoveredSettings ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={menuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0.01]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={menuOpacity}
           >
-            Credits
+            CREDITS
           </Text>
         </mesh>
       </GameInteractive>
 
-        {/*
-      |========================================
-      |               Start GAME
-      |========================================
-      */}
+      {/* START GAME */}
       <GameInteractive
         onHover={() => setHoveredStart(true)}
         onBlur={() => setHoveredStart(false)}
@@ -194,37 +158,28 @@ const MainMenu = () => {
         }}
       >
         <mesh position={[0, 1.6, -2.7]}>
-          <RoundedBox
-            args={[1.9, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.9, 0.2, 0.1]}>
             <meshBasicMaterial
               ref={addToMaterialRefs}
-              color={hoveredStart ? "#68725e" : "#666"}
+              color={hoveredStart ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={menuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0.01]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
-            color="#fff"
+            letterSpacing={0.05}
+            color="#ffffff"
             transparent={true}
             fillOpacity={menuOpacity}
           >
-            Start Game
+            START GAME
           </Text>
         </mesh>
       </GameInteractive>
 
-      {/*
-      |========================================
-      |               Tutorial
-      |========================================
-      */}
+      {/* HOW TO PLAY */}
       <GameInteractive
         onHover={() => setHoveredTutorial(true)}
         onBlur={() => setHoveredTutorial(false)}
@@ -234,32 +189,27 @@ const MainMenu = () => {
         }}
       >
         <mesh position={[0, 1, -2.7]}>
-          <RoundedBox
-            args={[1.9, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.9, 0.2, 0.1]}>
             <meshBasicMaterial
               ref={addToMaterialRefs}
-              color={hoveredTutorial ? "#777" : "#666"}
+              color={hoveredTutorial ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={menuOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0.01]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={menuOpacity}
           >
-            How To Play
+            HOW TO PLAY
           </Text>
         </mesh>
       </GameInteractive>
-      
-      {/* Plane for mapping logo onto */}
+
+      {/* Logo */}
       <Plane args={[2.5, 0.7]} position={[0, 2.3, -2.75]}>
         <meshBasicMaterial
           map={logo}

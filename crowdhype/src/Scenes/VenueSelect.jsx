@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RoundedBox, Text } from "@react-three/drei";
+import { Box, Text } from "@react-three/drei";
 import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
@@ -49,13 +49,14 @@ const VenueSelect = () => {
 
   return (
     <>
-      <Text 
-        fontSize={0.4} 
+      <Text
+        fontSize={0.4}
         position={[0, 3, ZLocation]}
+        letterSpacing={0.05}
         transparent={true}
         fillOpacity={venueSelectOpacity}
       >
-        Choose Your Venue
+        CHOOSE YOUR VENUE
       </Text>
 
       {/* Concert button */}
@@ -68,22 +69,17 @@ const VenueSelect = () => {
         }}
       >
         <mesh position={[0, 1.6, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredConcert ? "#777" : "#666"}
+              color={hoveredConcert ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={venueSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={venueSelectOpacity}
           >
@@ -102,22 +98,17 @@ const VenueSelect = () => {
         }}
       >
         <mesh position={[0, 1.3, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredGame ? "#777" : "#666"}
+              color={hoveredGame ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={venueSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={venueSelectOpacity}
           >
@@ -136,22 +127,17 @@ const VenueSelect = () => {
         }}
       >
         <mesh position={[0, 1, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredFestival ? "#777" : "#666"}
+              color={hoveredFestival ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={venueSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={venueSelectOpacity}
           >
@@ -160,6 +146,7 @@ const VenueSelect = () => {
         </mesh>
       </GameInteractive>
 
+      {/* Back button */}
       <GameInteractive
         onHover={() => setHoveredBackVenue(true)}
         onBlur={() => setHoveredBackVenue(false)}
@@ -169,22 +156,17 @@ const VenueSelect = () => {
         }}
       >
         <mesh position={[-1.3, 1.6, ZLocation]}>
-          <RoundedBox
-            args={[0.7, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[0.7, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredBackVenue ? "#777" : "#666"}
+              color={hoveredBackVenue ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={venueSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={venueSelectOpacity}
           >

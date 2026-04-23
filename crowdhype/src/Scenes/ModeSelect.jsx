@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RoundedBox, Text } from "@react-three/drei";
+import { Box, Text } from "@react-three/drei";
 import GameInteractive from "../Components/GameInteractive";
 import ButtonSound from "../Components/Sounds/ButtonSound";
 import { useGameCore }  from "../Context/GameCoreContext";
@@ -46,13 +46,14 @@ const ModeSelect = () => {
 
   return (
     <>
-      <Text 
-        fontSize={0.4} 
+      <Text
+        fontSize={0.4}
         position={[0, 3, ZLocation]}
+        letterSpacing={0.05}
         transparent={true}
         fillOpacity={modeSelectOpacity}
-        >
-        Mode Select
+      >
+        MODE SELECT
       </Text>
 
       {/* Session button */}
@@ -66,22 +67,17 @@ const ModeSelect = () => {
         }}
       >
         <mesh position={[0, 1.6, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredSession ? "#777" : "#666"}
+              color={hoveredSession ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={modeSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={modeSelectOpacity}
           >
@@ -101,22 +97,17 @@ const ModeSelect = () => {
         }}
       >
         <mesh position={[0, 1.3, ZLocation]}>
-          <RoundedBox
-            args={[1.3, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[1.3, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoveredEndless ? "#777" : "#666"}
+              color={hoveredEndless ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={modeSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={modeSelectOpacity}
           >
@@ -125,7 +116,7 @@ const ModeSelect = () => {
         </mesh>
       </GameInteractive>
 
-      {/* Back to main menu button */}
+      {/* Back button */}
       <GameInteractive
         onHover={() => setHoverBackModeSelect(true)}
         onBlur={() => setHoverBackModeSelect(false)}
@@ -135,22 +126,17 @@ const ModeSelect = () => {
         }}
       >
         <mesh position={[-1.3, 1.6, ZLocation]}>
-          <RoundedBox
-            args={[0.7, 0.2, 0.1]}
-            radius={0.1}
-            smoothness={16}
-            bevelSegments={0}
-            creaseAngle={2}
-          >
+          <Box args={[0.7, 0.2, 0.1]}>
             <meshBasicMaterial
-              color={hoverBackModeSelect ? "#777" : "#666"}
+              color={hoverBackModeSelect ? "#2a2a2a" : "#1a1a1a"}
               transparent={true}
               opacity={modeSelectOpacity}
             />
-          </RoundedBox>
+          </Box>
           <Text
-            position={[0, 0, 0]}
+            position={[0, 0, 0.06]}
             fontSize={fontSize}
+            letterSpacing={0.05}
             transparent={true}
             fillOpacity={modeSelectOpacity}
           >
@@ -158,21 +144,26 @@ const ModeSelect = () => {
           </Text>
         </mesh>
       </GameInteractive>
+
       <Text
         position={[0, 0.5, ZLocation]}
-        fontSize={fontSize}
+        fontSize={0.11}
+        letterSpacing={0.05}
+        color="#555"
         transparent={true}
         fillOpacity={modeSelectOpacity}
       >
-        SESSION: 2 MINUTE SESSIONS
+        SESSION — 2 MINUTE SESSIONS
       </Text>
       <Text
-        position={[0, 0.3, ZLocation]}
-        fontSize={fontSize}
+        position={[0, 0.35, ZLocation]}
+        fontSize={0.11}
+        letterSpacing={0.05}
+        color="#555"
         transparent={true}
         fillOpacity={modeSelectOpacity}
       >
-        ENDLESS: PLAY UNTIL YOU LOSE
+        ENDLESS — PLAY UNTIL YOU LOSE
       </Text>
     </>
   )
