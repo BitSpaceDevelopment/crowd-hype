@@ -3,5 +3,17 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/crowdhype-staging/",
+  base: "/crowd-hype/",
+  esbuild: {
+    loader: "jsx",
+    include: /src\/.*\.[jt]sx?$/,
+    exclude: [],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        ".js": "jsx",
+      },
+    },
+  },
 });
