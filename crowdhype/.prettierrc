@@ -1,0 +1,10 @@
+{
+  "semi": true,
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "vueIndentScriptAndStyle": true,
+  "prettier.endOfLine": "lf",
+  "prettier.ignorePath": ".prettierignore",
+  "prettier.arrowParens": "always",
+  "prettier.printWidth": 80
+}

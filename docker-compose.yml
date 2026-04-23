@@ -1,0 +1,41 @@
+name: mitt-mysql
+networks:
+    mitt-mysql-phpmyadmin:
+        name: mitt-mysql-phpmyadmin
+        # use the bridge driver
+        driver: bridge
+
+volumes:
+    mysqldata:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '${HOME}/mitt/mysql-phpmyadmin/data'
+
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root_password
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
+        volumes:
+            - mysqldata:/var/lib/mysql
+        ports:
+            - 3306:3306
+
+    mitt-phpmyadmin:
+        image: phpmyadmin:5.2.0
+        container_name: mitt-phpmyadmin
+        links:
+            - mysql
+        environment:
+            UPLOAD_LIMIT: 300M
+            PMA_HOST: mysql
+            PMA_PORT: 3306`
+        ports:
+            - 90:80
